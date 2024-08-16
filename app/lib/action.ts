@@ -115,3 +115,36 @@ export async function handleGetLinks() {
     });
   });
 }
+export const redirectLink = async (slug: string) => {
+  try {
+    const publicLinksCollection = collection(db, "links");
+    const customLinksCollection = collection(db, "customSlugs");
+    let querySnapshot = await getDocs(
+      query(publicLinksCollection, where("__name__", "==", slug))
+    );
+    let data = querySnapshot.docs[0]?.data();
+
+    if (!data) {
+      throw new Error("No link found for the given shortLink.");
+    }
+
+    const { linkId, userId } = data as { linkId: string; userId: string };
+    const userLinkDoc = doc(db, "users", userId, "links", linkId);
+
+    await updateDoc(userLinkDoc, { clicks: increment(1) });
+    console.log("Document updated.");
+
+    let link = data.link;
+
+    try {
+      new URL(link);
+    } catch (e) {
+      link = "https://" + link;
+    }
+
+    window.location.href = link;
+  } catch (e) {
+    console.error("Error getting document: ", e);
+    throw e;
+  }
+};

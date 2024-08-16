@@ -68,8 +68,8 @@ export default function RootLayout({
               </header>
             </div>
           </div>
-          <div className="flex-1 overflow-y-auto">
-            <main className=" flex justify-between items-center py-3 px-6 border-solid border-2 border-slate-200 sticky top-0">
+          <div className="flex-1 overflow-y-auto h-screen">
+            <main className=" flex justify-between items-center py-3 px-6 border-solid border-2 border-slate-200 sticky top-0 bg-white">
               <nav>
                 <h1 className=" font-bold text-base">Dashboard</h1>
               </nav>

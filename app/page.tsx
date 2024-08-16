@@ -5,7 +5,7 @@ import Features from "./components/features";
 export default function Home() {
   return (
     <main className="">
-      <div className="bg-blue-900 px-20">
+      <div className="bg-blue-900 px-6 md:px-20 ">
         <Header />
         <Hero />
       </div>
